@@ -1,0 +1,14 @@
+C:\Users\Jon\source\repos\GSM\GSM-UI\bin\Debug\GSM-UI.exe.config
+C:\Users\Jon\source\repos\GSM\GSM-UI\bin\Debug\GSM-UI.exe
+C:\Users\Jon\source\repos\GSM\GSM-UI\bin\Debug\GSM-UI.pdb
+C:\Users\Jon\source\repos\GSM\GSM-UI\bin\Debug\GSM.exe
+C:\Users\Jon\source\repos\GSM\GSM-UI\bin\Debug\GSM.pdb
+C:\Users\Jon\source\repos\GSM\GSM-UI\bin\Debug\GSM.exe.config
+C:\Users\Jon\source\repos\GSM\GSM-UI\obj\Debug\GSM-UI.csprojAssemblyReference.cache
+C:\Users\Jon\source\repos\GSM\GSM-UI\obj\Debug\GSM_UI.Form1.resources
+C:\Users\Jon\source\repos\GSM\GSM-UI\obj\Debug\GSM_UI.Properties.Resources.resources
+C:\Users\Jon\source\repos\GSM\GSM-UI\obj\Debug\GSM-UI.csproj.GenerateResource.cache
+C:\Users\Jon\source\repos\GSM\GSM-UI\obj\Debug\GSM-UI.csproj.CoreCompileInputs.cache
+C:\Users\Jon\source\repos\GSM\GSM-UI\obj\Debug\GSM-UI.csproj.CopyComplete
+C:\Users\Jon\source\repos\GSM\GSM-UI\obj\Debug\GSM-UI.exe
+C:\Users\Jon\source\repos\GSM\GSM-UI\obj\Debug\GSM-UI.pdb

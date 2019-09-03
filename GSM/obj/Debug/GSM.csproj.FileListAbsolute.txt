@@ -1,0 +1,7 @@
+C:\Users\Jon\source\repos\GSM\GSM\bin\Debug\GSM.exe.config
+C:\Users\Jon\source\repos\GSM\GSM\bin\Debug\GSM.exe
+C:\Users\Jon\source\repos\GSM\GSM\bin\Debug\GSM.pdb
+C:\Users\Jon\source\repos\GSM\GSM\obj\Debug\GSM.csprojAssemblyReference.cache
+C:\Users\Jon\source\repos\GSM\GSM\obj\Debug\GSM.csproj.CoreCompileInputs.cache
+C:\Users\Jon\source\repos\GSM\GSM\obj\Debug\GSM.exe
+C:\Users\Jon\source\repos\GSM\GSM\obj\Debug\GSM.pdb
