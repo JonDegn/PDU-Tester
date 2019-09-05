@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GSM;
@@ -19,35 +20,14 @@ namespace GSM_UI
         public Form1()
         {
             InitializeComponent();
-            var serial = new SerialPort();
-            serial.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
-
-
-            GSM = new Sim800L(serial, "COM8");
-
+            GSM = new Sim800L("COM9");
+            GSM.Command("ATE0");
         }
 
-        private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+        private void GetInfo()
         {
-            SerialPort sp = (SerialPort)sender;
-
-            while (sp.BytesToRead > 0)
-            {
-                string rawData = sp.ReadLine();
-
-                dataReceivedRichTextBox.Invoke((MethodInvoker) delegate {
-                    dataReceivedRichTextBox.AppendText(rawData, Color.Blue);
-                });
-                var parameters = rawData.Split(',');
-
-                if (rawData.StartsWith("+CLIP"))
-                {
-                    phoneNumberTextBox.Invoke((MethodInvoker)delegate {
-                        phoneNumberTextBox.Text = parameters[0].Substring(7).Trim('\"');
-                    });
-                }
-            }
-
+            GSM.Command("AT+CGMM");
+            GSM.Command("AT+CGMI");
         }
 
         private void SendBtn_Click(object sender, EventArgs e)
@@ -69,6 +49,65 @@ namespace GSM_UI
         private void HangupBtn_Click(object sender, EventArgs e)
         {
             GSM.Hangup();
+        }
+
+        //private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+        //{
+
+        //    SerialPort sp = (SerialPort)sender;
+
+        //    while (sp.BytesToRead > 0)
+        //    {
+        //        string rawData = sp.ReadLine();
+
+        //        dataReceivedRichTextBox.Invoke((MethodInvoker)delegate
+        //        {
+        //            dataReceivedRichTextBox.AppendText(rawData, Color.Blue);
+        //        });
+        //        var parameters = rawData.Split(',');
+
+        //        if (rawData.StartsWith("+CLIP"))
+        //        {
+        //            phoneNumberTextBox.Invoke((MethodInvoker)delegate
+        //            {
+        //                phoneNumberTextBox.Text = parameters[0].Substring(7).Trim('\"');
+        //            });
+        //        }
+
+        //        if (rawData.StartsWith("AT+CGMM"))
+        //        {
+        //            rawData = sp.ReadLine();
+        //            dataReceivedRichTextBox.Invoke((MethodInvoker)delegate
+        //            {
+        //                dataReceivedRichTextBox.AppendText(rawData, Color.Blue);
+        //            });
+
+        //            phoneNumberTextBox.Invoke((MethodInvoker)delegate
+        //            {
+        //                connectionDeviceModelText.Text = rawData;
+        //            });
+        //        }
+
+        //        if (rawData.StartsWith("AT+CGMI"))
+        //        {
+        //            rawData = sp.ReadLine();
+        //            dataReceivedRichTextBox.Invoke((MethodInvoker)delegate
+        //            {
+        //                dataReceivedRichTextBox.AppendText(rawData, Color.Blue);
+        //            });
+
+        //            phoneNumberTextBox.Invoke((MethodInvoker)delegate
+        //            {
+        //                connectionManufacturerText.Text = rawData;
+        //            });
+        //        }
+        //    }
+        //}
+
+        private void GetInfoButton_Click(object sender, EventArgs e)
+        {
+            connectionManufacturerText.Text = GSM.Command("AT+CGMM");
+            GSM.Command("AT+CGMI");
         }
     }
 }

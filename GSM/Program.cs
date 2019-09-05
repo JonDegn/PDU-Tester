@@ -12,28 +12,11 @@ namespace GSM
         static void Main(string[] args)
         {
 
-            using (var serial = new SerialPort())
+            var sim = new Sim800L("COM8");
+            while (true)
             {
-                var sim = new Sim800L(serial, "COM8");
-                while (true)
-                {
-                    Console.WriteLine("A: answer\nH: hangup\nD: dial");
-                    var key = Console.ReadKey();
-                    switch (key.Key)
-                    {
-                        case ConsoleKey.A:
-                            sim.Answer();
-                            break;
-                        case ConsoleKey.H:
-                            sim.Hangup();
-                            break;
-                        case ConsoleKey.D:
-                            Console.WriteLine("Type number to dial.");
-                            var number = Console.ReadLine();
-                            sim.Dial(number);
-                            break;
-                    }
-                }
+                var cmd = Console.ReadLine();
+                Console.WriteLine(sim.Command(cmd));
             }
 
         }
