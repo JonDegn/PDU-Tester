@@ -15,7 +15,10 @@ namespace GSM
         private SerialPort Serial { get; }
         private Queue<string> Buffer { get; } = new Queue<string>();
  
-        private Action Ring { get; set; }
+        public EventHandler OnRing { get; set; }
+        public EventHandler OnClip { get; set; }
+        public EventHandler OnClcc { get; set; }
+        public EventHandler<string> DataReceived { get; set; }
 
         public Sim800L(string port)
         {
@@ -28,7 +31,7 @@ namespace GSM
             Serial.Handshake = Handshake.None;
 
             Serial.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
-
+            
             Serial.Open();
         }
 
@@ -66,29 +69,37 @@ namespace GSM
             Command($"ATS0={rings}");
         }
 
-        public void RegisterRingCallback(Action action)
+        private void Ring(EventArgs e)
         {
-            Ring = action;
+            OnRing?.Invoke(this, e);
         }
 
-        //private void Ring()
-        //{
-        //    Console.Beep();
-        //}
+        private void Clip(EventArgs e)
+        {
+            OnClip?.Invoke(this, e);
+        }
+
+        private void Clcc(EventArgs e)
+        {
+            OnClcc?.Invoke(this, e);
+        }
 
         private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
         {
             SerialPort sp = (SerialPort)sender;
+            
             while (Serial.BytesToRead > 0)
             {
                 var rawData = sp.ReadLine();
+                DataReceived?.Invoke(this, rawData);
                 if (rawData.StartsWith("RING"))
                 {
-                    Ring();
+                    Ring(EventArgs.Empty);
                 }
                 else if (rawData.StartsWith("+CLIP"))
                 {
                     //+CLIP: "+13853093066",145,"",0,"",0
+
                 }
                 else if (rawData.StartsWith("+CLCC"))
                 {
@@ -111,16 +122,18 @@ namespace GSM
         {
             var watch = Stopwatch.StartNew();
             string result = "";
-            Thread.Sleep(500);
+            //Thread.Sleep(500);
             while (Buffer.Count == 0 && watch.ElapsedMilliseconds < waitFor)
             {
                 Thread.Sleep(50);
             }
             while (Buffer.Count != 0)
             {
-                result += Buffer.Dequeue() + "\n";
+                var val = Buffer.Dequeue();
+                //if (val.StartsWith("OK")) break;
+                result += val + "\n";
             }
-            return result;
+            return result.Trim();
         }
 
         public void Dispose()

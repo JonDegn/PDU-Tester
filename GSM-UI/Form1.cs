@@ -20,14 +20,15 @@ namespace GSM_UI
         public Form1()
         {
             InitializeComponent();
-            GSM = new Sim800L("COM9");
+            GSM = new Sim800L("COM8");
             GSM.Command("ATE0");
-        }
-
-        private void GetInfo()
-        {
-            GSM.Command("AT+CGMM");
-            GSM.Command("AT+CGMI");
+            GSM.DataReceived += (_, data) =>
+            {
+                dataReceivedRichTextBox.Invoke((MethodInvoker)delegate
+                {
+                    dataReceivedRichTextBox.AppendText($"{data}\n", Color.Blue);
+                });
+            };
         }
 
         private void SendBtn_Click(object sender, EventArgs e)
@@ -106,8 +107,9 @@ namespace GSM_UI
 
         private void GetInfoButton_Click(object sender, EventArgs e)
         {
-            connectionManufacturerText.Text = GSM.Command("AT+CGMM");
-            GSM.Command("AT+CGMI");
+            var cgmm = connectionDeviceModelText.Text = GSM.Command("AT+CGMM"); 
+            var cgmi = connectionManufacturerText.Text = GSM.Command("AT+CGMI");
+            MessageBox.Show(cgmm + "\n" + cgmi);
         }
     }
 }
