@@ -9,107 +9,111 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using GSM;
+using GsmComm.GsmCommunication;
+
 
 namespace GSM_UI
 {
     public partial class Form1 : Form
     {
-        public Sim800L GSM { get; }
+        public GsmPhone GSM { get; set; }
+
+        public bool Connected => GSM != null && GSM.IsConnected();
 
         public Form1()
         {
             InitializeComponent();
-            GSM = new Sim800L("COM8");
-            GSM.Command("ATE0");
-            GSM.DataReceived += (_, data) =>
+        }
+
+        private void LogHandler(object sender, LoglineAddedEventArgs e)
+        {
+            dataReceivedRichTextBox.Invoke((MethodInvoker)delegate
             {
-                dataReceivedRichTextBox.Invoke((MethodInvoker)delegate
-                {
-                    dataReceivedRichTextBox.AppendText($"{data}\n", Color.Blue);
-                });
-            };
+                dataReceivedRichTextBox.AppendText($"{e.Text}\n", Color.Blue);
+            });
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            portComboBox.Items.AddRange(SerialPort.GetPortNames());
+            baudRateComboBox.SelectedIndex = 4;
+            mainTabControl.Enabled = false;
+            disconnectBtn.Enabled = false;
+            getInfoButton.Enabled = false;
         }
 
         private void SendBtn_Click(object sender, EventArgs e)
         {
-            GSM.Command(cmdTextBox.Text.Trim());
+            ((IProtocol)GSM).ExecAndReceiveMultiple(cmdTextBox.Text.Trim());
         }
 
         private void CallBtn_Click(object sender, EventArgs e)
         {
-            dataReceivedRichTextBox.AppendText($"Dialing {dialTextBox.Text}...\n\n");
-            GSM.Dial(dialTextBox.Text);
+            ((IProtocol)GSM).ExecAndReceiveMultiple($"ATD{dialTextBox.Text.Trim()};");
         }
 
         private void AnswerBtn_Click(object sender, EventArgs e)
         {
-            GSM.Answer();
+            ((IProtocol)GSM).ExecAndReceiveMultiple("ATA");
         }
 
         private void HangupBtn_Click(object sender, EventArgs e)
         {
-            GSM.Hangup();
+            ((IProtocol)GSM).ExecAndReceiveMultiple("ATH");
         }
-
-        //private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
-        //{
-
-        //    SerialPort sp = (SerialPort)sender;
-
-        //    while (sp.BytesToRead > 0)
-        //    {
-        //        string rawData = sp.ReadLine();
-
-        //        dataReceivedRichTextBox.Invoke((MethodInvoker)delegate
-        //        {
-        //            dataReceivedRichTextBox.AppendText(rawData, Color.Blue);
-        //        });
-        //        var parameters = rawData.Split(',');
-
-        //        if (rawData.StartsWith("+CLIP"))
-        //        {
-        //            phoneNumberTextBox.Invoke((MethodInvoker)delegate
-        //            {
-        //                phoneNumberTextBox.Text = parameters[0].Substring(7).Trim('\"');
-        //            });
-        //        }
-
-        //        if (rawData.StartsWith("AT+CGMM"))
-        //        {
-        //            rawData = sp.ReadLine();
-        //            dataReceivedRichTextBox.Invoke((MethodInvoker)delegate
-        //            {
-        //                dataReceivedRichTextBox.AppendText(rawData, Color.Blue);
-        //            });
-
-        //            phoneNumberTextBox.Invoke((MethodInvoker)delegate
-        //            {
-        //                connectionDeviceModelText.Text = rawData;
-        //            });
-        //        }
-
-        //        if (rawData.StartsWith("AT+CGMI"))
-        //        {
-        //            rawData = sp.ReadLine();
-        //            dataReceivedRichTextBox.Invoke((MethodInvoker)delegate
-        //            {
-        //                dataReceivedRichTextBox.AppendText(rawData, Color.Blue);
-        //            });
-
-        //            phoneNumberTextBox.Invoke((MethodInvoker)delegate
-        //            {
-        //                connectionManufacturerText.Text = rawData;
-        //            });
-        //        }
-        //    }
-        //}
 
         private void GetInfoButton_Click(object sender, EventArgs e)
         {
-            var cgmm = connectionDeviceModelText.Text = GSM.Command("AT+CGMM"); 
-            var cgmi = connectionManufacturerText.Text = GSM.Command("AT+CGMI");
-            MessageBox.Show(cgmm + "\n" + cgmi);
+            if (Connected)
+            {
+                connectionDeviceModelText.Text = GSM.RequestModel();
+                connectionManufacturerText.Text = GSM.RequestManufacturer();
+                connectionStatusText.Text = GSM.IsConnected() ? "OK" : "Disconnected";
+            }
+        }
+
+        private void ConnectBtn_Click(object sender, EventArgs e)
+        {
+            if (!Connected)
+            {
+                if (!int.TryParse(timeoutTextBox.Text, out var parsedTimeout))
+                {
+                    MessageBox.Show("Timeout must be a number.");
+                    return;
+                }
+
+                GSM = new GsmPhone(portComboBox.SelectedText, int.Parse(baudRateComboBox.SelectedText), parsedTimeout);
+                GSM.Open();
+                mainTabControl.Enabled = true;
+                disconnectBtn.Enabled = true;
+                portComboBox.Enabled = true;
+                baudRateComboBox.Enabled = true;
+                getInfoButton.Enabled = true;
+                GSM.LoglineAdded += LogHandler;
+            }
+        }
+
+        private void FindPortsBtn_Click(object sender, EventArgs e)
+        {
+            portComboBox.Items.AddRange(SerialPort.GetPortNames());
+        }
+
+        private void DisconnectBtn_Click(object sender, EventArgs e)
+        {
+            if (Connected)
+            {
+                GSM.Close();
+                mainTabControl.Enabled = false;
+                disconnectBtn.Enabled = false;
+                portComboBox.Enabled = false;
+                baudRateComboBox.Enabled = false;
+                getInfoButton.Enabled = false;
+            }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (Connected) GSM.Close();
         }
     }
 }
