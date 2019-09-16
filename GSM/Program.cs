@@ -16,15 +16,20 @@ namespace GSM
         static void Main(string[] args)
         {
 
-            var comm = new GsmCommMain("COM7", 115200);
+            var comm = new GsmPhone("COM11", 115200, 500);
             comm.Open();
             try
             {
                 var pdu = new SmsSubmitPdu("How does this look?", "3853093066");
                 //pdu.ProtocolID = 64;
                 //pdu.DataCodingScheme = 64;
-                
-                comm.SendMessage(pdu);
+
+                comm.SendMessage(pdu.ToString(), pdu.ActualLength);
+                //Console.WriteLine(comm.IsConnected());
+                //Thread.Sleep(1000);
+                //Console.WriteLine(comm.RequestManufacturer());
+                //Thread.Sleep(1000);
+                //Console.WriteLine(comm.RequestModel());
                 Thread.Sleep(1000);
             }
             finally
@@ -40,17 +45,6 @@ namespace GSM
 
 
 
-        enum ProtocolIdentifier
-        {
-            ShortMessage = 0,
-            ShortMessageType0 = 64,
-            ReplaceShortMessageType1 = 65,
-            ReplaceShortMessageType2 = 66,
-            ReplaceShortMessageType3 = 67,
-            ReplaceShortMessageType4 = 68,
-            ReplaceShortMessageType5 = 69,
-            ReplaceShortMessageType6 = 70,
-            ReplaceShortMessageType7 = 71
-        }
+
     }
 }
