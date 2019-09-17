@@ -45,7 +45,6 @@ namespace GSM_UI
             this.answerBtn = new System.Windows.Forms.Button();
             this.hangupBtn2 = new System.Windows.Forms.Button();
             this.OutgoingVoiceCallGroupBox = new System.Windows.Forms.GroupBox();
-            this.redialButton = new System.Windows.Forms.Button();
             this.callNumberLabel = new System.Windows.Forms.Label();
             this.smsTab = new System.Windows.Forms.TabPage();
             this.SmsTabControl = new System.Windows.Forms.TabControl();
@@ -58,6 +57,8 @@ namespace GSM_UI
             this.smsMessagePhoneNumberLabel = new System.Windows.Forms.Label();
             this.smsMessagePhoneNumberTextBox = new System.Windows.Forms.TextBox();
             this.smsInboxTab = new System.Windows.Forms.TabPage();
+            this.smsInboxGrid = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             this.smsSettingsTab = new System.Windows.Forms.TabPage();
             this.smsSettingsPDUGroup = new System.Windows.Forms.GroupBox();
             this.dcsComboBox = new System.Windows.Forms.ComboBox();
@@ -88,8 +89,8 @@ namespace GSM_UI
             this.connectBtn = new System.Windows.Forms.Button();
             this.baudRateComboBox = new System.Windows.Forms.ComboBox();
             this.portComboBox = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.smsInboxGrid = new System.Windows.Forms.DataGridView();
+            this.receiveButton = new System.Windows.Forms.Button();
+            this.IncomingCallBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.mainTabControl.SuspendLayout();
             this.mainTab.SuspendLayout();
             this.voiceCallTab.SuspendLayout();
@@ -100,12 +101,12 @@ namespace GSM_UI
             this.smsMessageTab.SuspendLayout();
             this.smsMessageGroup.SuspendLayout();
             this.smsInboxTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.smsInboxGrid)).BeginInit();
             this.smsSettingsTab.SuspendLayout();
             this.smsSettingsPDUGroup.SuspendLayout();
             this.smsSettingsGroup.SuspendLayout();
             this.connectionGroup.SuspendLayout();
             this.portConfigurationGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.smsInboxGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // cmdTextBox
@@ -174,6 +175,7 @@ namespace GSM_UI
             // 
             // mainTab
             // 
+            this.mainTab.Controls.Add(this.receiveButton);
             this.mainTab.Controls.Add(this.commandLabel);
             this.mainTab.Controls.Add(this.cmdTextBox);
             this.mainTab.Controls.Add(this.sendBtn);
@@ -250,7 +252,6 @@ namespace GSM_UI
             // 
             // OutgoingVoiceCallGroupBox
             // 
-            this.OutgoingVoiceCallGroupBox.Controls.Add(this.redialButton);
             this.OutgoingVoiceCallGroupBox.Controls.Add(this.callNumberLabel);
             this.OutgoingVoiceCallGroupBox.Controls.Add(this.dialTextBox);
             this.OutgoingVoiceCallGroupBox.Controls.Add(this.hangupBtn);
@@ -261,15 +262,6 @@ namespace GSM_UI
             this.OutgoingVoiceCallGroupBox.TabIndex = 8;
             this.OutgoingVoiceCallGroupBox.TabStop = false;
             this.OutgoingVoiceCallGroupBox.Text = "Outgoing";
-            // 
-            // redialButton
-            // 
-            this.redialButton.Location = new System.Drawing.Point(326, 35);
-            this.redialButton.Name = "redialButton";
-            this.redialButton.Size = new System.Drawing.Size(75, 23);
-            this.redialButton.TabIndex = 9;
-            this.redialButton.Text = "Redial";
-            this.redialButton.UseVisualStyleBackColor = true;
             // 
             // callNumberLabel
             // 
@@ -399,6 +391,27 @@ namespace GSM_UI
             this.smsInboxTab.TabIndex = 1;
             this.smsInboxTab.Text = "Inbox";
             this.smsInboxTab.UseVisualStyleBackColor = true;
+            // 
+            // smsInboxGrid
+            // 
+            this.smsInboxGrid.AllowUserToAddRows = false;
+            this.smsInboxGrid.AllowUserToDeleteRows = false;
+            this.smsInboxGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.smsInboxGrid.Location = new System.Drawing.Point(8, 5);
+            this.smsInboxGrid.Name = "smsInboxGrid";
+            this.smsInboxGrid.ReadOnly = true;
+            this.smsInboxGrid.Size = new System.Drawing.Size(464, 259);
+            this.smsInboxGrid.TabIndex = 8;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(5, 270);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Get Inbox";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // smsSettingsTab
             // 
@@ -733,26 +746,20 @@ namespace GSM_UI
             this.portComboBox.TabIndex = 0;
             this.portComboBox.ValueMember = "name";
             // 
-            // button1
+            // receiveButton
             // 
-            this.button1.Location = new System.Drawing.Point(5, 270);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Get Inbox";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.receiveButton.Location = new System.Drawing.Point(266, 31);
+            this.receiveButton.Name = "receiveButton";
+            this.receiveButton.Size = new System.Drawing.Size(75, 23);
+            this.receiveButton.TabIndex = 3;
+            this.receiveButton.Text = "Receive";
+            this.receiveButton.UseVisualStyleBackColor = true;
+            this.receiveButton.Click += new System.EventHandler(this.ReceiveButton_Click);
             // 
-            // smsInboxGrid
+            // IncomingCallBackgroundWorker
             // 
-            this.smsInboxGrid.AllowUserToAddRows = false;
-            this.smsInboxGrid.AllowUserToDeleteRows = false;
-            this.smsInboxGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.smsInboxGrid.Location = new System.Drawing.Point(8, 5);
-            this.smsInboxGrid.Name = "smsInboxGrid";
-            this.smsInboxGrid.ReadOnly = true;
-            this.smsInboxGrid.Size = new System.Drawing.Size(464, 259);
-            this.smsInboxGrid.TabIndex = 8;
+            this.IncomingCallBackgroundWorker.WorkerSupportsCancellation = true;
+            this.IncomingCallBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
             // 
             // Form1
             // 
@@ -782,6 +789,7 @@ namespace GSM_UI
             this.smsMessageGroup.ResumeLayout(false);
             this.smsMessageGroup.PerformLayout();
             this.smsInboxTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.smsInboxGrid)).EndInit();
             this.smsSettingsTab.ResumeLayout(false);
             this.smsSettingsPDUGroup.ResumeLayout(false);
             this.smsSettingsPDUGroup.PerformLayout();
@@ -791,7 +799,6 @@ namespace GSM_UI
             this.connectionGroup.PerformLayout();
             this.portConfigurationGroup.ResumeLayout(false);
             this.portConfigurationGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.smsInboxGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -815,7 +822,6 @@ namespace GSM_UI
         private System.Windows.Forms.GroupBox OutgoingVoiceCallGroupBox;
         private System.Windows.Forms.Label callNumberLabel;
         private System.Windows.Forms.RichTextBox dataReceivedRichTextBox;
-        private System.Windows.Forms.Button redialButton;
         private System.Windows.Forms.TabPage smsTab;
         private System.Windows.Forms.TabControl SmsTabControl;
         private System.Windows.Forms.TabPage smsMessageTab;
@@ -858,6 +864,8 @@ namespace GSM_UI
         private System.Windows.Forms.ComboBox pidComboBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView smsInboxGrid;
+        private System.Windows.Forms.Button receiveButton;
+        private System.ComponentModel.BackgroundWorker IncomingCallBackgroundWorker;
     }
 }
 
