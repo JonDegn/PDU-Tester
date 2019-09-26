@@ -15,28 +15,30 @@ namespace GSM
     {
         static void Main(string[] args)
         {
+            //SmsPdu
+            //var pdu = SmsDeliverPdu.Decode("0031000A8110325476980000FF07F4F29C9E769F01", false);
+            //Console.WriteLine(pdu);
+            //var comm = new GsmPhone("COM11", 115200, 500);
+            //comm.Open();
+            //try
+            //{
+            //    var pdu = new SmsSubmitPdu("How does this look?", "3853093066");
+            //    //pdu.ProtocolID = 64;
+            //    //pdu.DataCodingScheme = 64;
 
-            var comm = new GsmPhone("COM11", 115200, 500);
-            comm.Open();
-            try
-            {
-                var pdu = new SmsSubmitPdu("How does this look?", "3853093066");
-                //pdu.ProtocolID = 64;
-                //pdu.DataCodingScheme = 64;
-
-                comm.SendMessage(pdu.ToString(), pdu.ActualLength);
-                //Console.WriteLine(comm.IsConnected());
-                //Thread.Sleep(1000);
-                //Console.WriteLine(comm.RequestManufacturer());
-                //Thread.Sleep(1000);
-                //Console.WriteLine(comm.RequestModel());
-                Thread.Sleep(1000);
-            }
-            finally
-            {
-                comm.Close();
-            }
-            Console.ReadKey();
+            //    comm.SendMessage(pdu.ToString(), pdu.ActualLength);
+            //    //Console.WriteLine(comm.IsConnected());
+            //    //Thread.Sleep(1000);
+            //    //Console.WriteLine(comm.RequestManufacturer());
+            //    //Thread.Sleep(1000);
+            //    //Console.WriteLine(comm.RequestModel());
+            //    Thread.Sleep(1000);
+            //}
+            //finally
+            //{
+            //    comm.Close();
+            //}
+            //Console.ReadKey();
 
 
         }

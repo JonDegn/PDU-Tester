@@ -30,6 +30,7 @@ namespace GSM_UI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.cmdTextBox = new System.Windows.Forms.TextBox();
             this.commandLabel = new System.Windows.Forms.Label();
             this.sendBtn = new System.Windows.Forms.Button();
@@ -38,8 +39,10 @@ namespace GSM_UI
             this.dialTextBox = new System.Windows.Forms.TextBox();
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.mainTab = new System.Windows.Forms.TabPage();
+            this.receiveButton = new System.Windows.Forms.Button();
             this.voiceCallTab = new System.Windows.Forms.TabPage();
             this.incomingVoiceCallGroupBox = new System.Windows.Forms.GroupBox();
+            this.checkIncomingCheckBox = new System.Windows.Forms.CheckBox();
             this.phoneNumberLabel = new System.Windows.Forms.Label();
             this.phoneNumberTextBox = new System.Windows.Forms.TextBox();
             this.answerBtn = new System.Windows.Forms.Button();
@@ -61,6 +64,7 @@ namespace GSM_UI
             this.button1 = new System.Windows.Forms.Button();
             this.smsSettingsTab = new System.Windows.Forms.TabPage();
             this.smsSettingsPDUGroup = new System.Windows.Forms.GroupBox();
+            this.requestStatusReportCheckBox = new System.Windows.Forms.CheckBox();
             this.dcsComboBox = new System.Windows.Forms.ComboBox();
             this.pidComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -89,8 +93,9 @@ namespace GSM_UI
             this.connectBtn = new System.Windows.Forms.Button();
             this.baudRateComboBox = new System.Windows.Forms.ComboBox();
             this.portComboBox = new System.Windows.Forms.ComboBox();
-            this.receiveButton = new System.Windows.Forms.Button();
             this.IncomingCallBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.batteryLevel = new System.Windows.Forms.Label();
+            this.batteryLabel = new System.Windows.Forms.Label();
             this.mainTabControl.SuspendLayout();
             this.mainTab.SuspendLayout();
             this.voiceCallTab.SuspendLayout();
@@ -187,6 +192,16 @@ namespace GSM_UI
             this.mainTab.Text = "Main";
             this.mainTab.UseVisualStyleBackColor = true;
             // 
+            // receiveButton
+            // 
+            this.receiveButton.Location = new System.Drawing.Point(266, 31);
+            this.receiveButton.Name = "receiveButton";
+            this.receiveButton.Size = new System.Drawing.Size(75, 23);
+            this.receiveButton.TabIndex = 3;
+            this.receiveButton.Text = "Receive";
+            this.receiveButton.UseVisualStyleBackColor = true;
+            this.receiveButton.Click += new System.EventHandler(this.ReceiveButton_Click);
+            // 
             // voiceCallTab
             // 
             this.voiceCallTab.Controls.Add(this.incomingVoiceCallGroupBox);
@@ -201,6 +216,7 @@ namespace GSM_UI
             // 
             // incomingVoiceCallGroupBox
             // 
+            this.incomingVoiceCallGroupBox.Controls.Add(this.checkIncomingCheckBox);
             this.incomingVoiceCallGroupBox.Controls.Add(this.phoneNumberLabel);
             this.incomingVoiceCallGroupBox.Controls.Add(this.phoneNumberTextBox);
             this.incomingVoiceCallGroupBox.Controls.Add(this.answerBtn);
@@ -211,6 +227,17 @@ namespace GSM_UI
             this.incomingVoiceCallGroupBox.TabIndex = 9;
             this.incomingVoiceCallGroupBox.TabStop = false;
             this.incomingVoiceCallGroupBox.Text = "Incoming";
+            // 
+            // checkIncomingCheckBox
+            // 
+            this.checkIncomingCheckBox.AutoSize = true;
+            this.checkIncomingCheckBox.Location = new System.Drawing.Point(263, 39);
+            this.checkIncomingCheckBox.Name = "checkIncomingCheckBox";
+            this.checkIncomingCheckBox.Size = new System.Drawing.Size(135, 17);
+            this.checkIncomingCheckBox.TabIndex = 10;
+            this.checkIncomingCheckBox.Text = "Scan for incoming calls";
+            this.checkIncomingCheckBox.UseVisualStyleBackColor = true;
+            this.checkIncomingCheckBox.CheckedChanged += new System.EventHandler(this.CheckIncomingCheckBox_CheckedChanged);
             // 
             // phoneNumberLabel
             // 
@@ -427,6 +454,7 @@ namespace GSM_UI
             // 
             // smsSettingsPDUGroup
             // 
+            this.smsSettingsPDUGroup.Controls.Add(this.requestStatusReportCheckBox);
             this.smsSettingsPDUGroup.Controls.Add(this.dcsComboBox);
             this.smsSettingsPDUGroup.Controls.Add(this.pidComboBox);
             this.smsSettingsPDUGroup.Controls.Add(this.label2);
@@ -439,6 +467,16 @@ namespace GSM_UI
             this.smsSettingsPDUGroup.TabIndex = 1;
             this.smsSettingsPDUGroup.TabStop = false;
             this.smsSettingsPDUGroup.Text = "PDU Settings";
+            // 
+            // requestStatusReportCheckBox
+            // 
+            this.requestStatusReportCheckBox.AutoSize = true;
+            this.requestStatusReportCheckBox.Location = new System.Drawing.Point(16, 103);
+            this.requestStatusReportCheckBox.Name = "requestStatusReportCheckBox";
+            this.requestStatusReportCheckBox.Size = new System.Drawing.Size(127, 17);
+            this.requestStatusReportCheckBox.TabIndex = 19;
+            this.requestStatusReportCheckBox.Text = "Request status report";
+            this.requestStatusReportCheckBox.UseVisualStyleBackColor = true;
             // 
             // dcsComboBox
             // 
@@ -567,6 +605,8 @@ namespace GSM_UI
             // 
             // connectionGroup
             // 
+            this.connectionGroup.Controls.Add(this.batteryLevel);
+            this.connectionGroup.Controls.Add(this.batteryLabel);
             this.connectionGroup.Controls.Add(this.connectionStatusText);
             this.connectionGroup.Controls.Add(this.connectionManufacturerText);
             this.connectionGroup.Controls.Add(this.connectionDeviceModelText);
@@ -577,7 +617,7 @@ namespace GSM_UI
             this.connectionGroup.Margin = new System.Windows.Forms.Padding(2);
             this.connectionGroup.Name = "connectionGroup";
             this.connectionGroup.Padding = new System.Windows.Forms.Padding(2);
-            this.connectionGroup.Size = new System.Drawing.Size(232, 100);
+            this.connectionGroup.Size = new System.Drawing.Size(232, 113);
             this.connectionGroup.TabIndex = 10;
             this.connectionGroup.TabStop = false;
             this.connectionGroup.Text = "Connection";
@@ -746,20 +786,32 @@ namespace GSM_UI
             this.portComboBox.TabIndex = 0;
             this.portComboBox.ValueMember = "name";
             // 
-            // receiveButton
-            // 
-            this.receiveButton.Location = new System.Drawing.Point(266, 31);
-            this.receiveButton.Name = "receiveButton";
-            this.receiveButton.Size = new System.Drawing.Size(75, 23);
-            this.receiveButton.TabIndex = 3;
-            this.receiveButton.Text = "Receive";
-            this.receiveButton.UseVisualStyleBackColor = true;
-            this.receiveButton.Click += new System.EventHandler(this.ReceiveButton_Click);
-            // 
             // IncomingCallBackgroundWorker
             // 
             this.IncomingCallBackgroundWorker.WorkerSupportsCancellation = true;
             this.IncomingCallBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
+            // 
+            // batteryLevel
+            // 
+            this.batteryLevel.AutoSize = true;
+            this.batteryLevel.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.batteryLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.batteryLevel.ForeColor = System.Drawing.Color.Blue;
+            this.batteryLevel.Location = new System.Drawing.Point(110, 89);
+            this.batteryLevel.Name = "batteryLevel";
+            this.batteryLevel.Size = new System.Drawing.Size(60, 13);
+            this.batteryLevel.TabIndex = 7;
+            this.batteryLevel.Text = "Unknown";
+            // 
+            // batteryLabel
+            // 
+            this.batteryLabel.AutoSize = true;
+            this.batteryLabel.Location = new System.Drawing.Point(10, 89);
+            this.batteryLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.batteryLabel.Name = "batteryLabel";
+            this.batteryLabel.Size = new System.Drawing.Size(40, 13);
+            this.batteryLabel.TabIndex = 6;
+            this.batteryLabel.Text = "Battery";
             // 
             // Form1
             // 
@@ -771,6 +823,7 @@ namespace GSM_UI
             this.Controls.Add(this.connectionGroup);
             this.Controls.Add(this.dataReceivedRichTextBox);
             this.Controls.Add(this.mainTabControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "GSM Tester";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
@@ -866,6 +919,10 @@ namespace GSM_UI
         private System.Windows.Forms.DataGridView smsInboxGrid;
         private System.Windows.Forms.Button receiveButton;
         private System.ComponentModel.BackgroundWorker IncomingCallBackgroundWorker;
+        private System.Windows.Forms.CheckBox checkIncomingCheckBox;
+        private System.Windows.Forms.CheckBox requestStatusReportCheckBox;
+        private System.Windows.Forms.Label batteryLevel;
+        private System.Windows.Forms.Label batteryLabel;
     }
 }
 

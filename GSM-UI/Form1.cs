@@ -100,6 +100,7 @@ namespace GSM_UI
                     connectionDeviceModelText.Text = GSM.RequestModel();
                     connectionManufacturerText.Text = GSM.RequestManufacturer();
                     connectionStatusText.Text = GSM.IsConnected() ? "OK" : "Disconnected";
+                    batteryLevel.Text = GSM.GetBatteryCharge().BatteryChargeLevel.ToString();
                 });
             }
             else
@@ -161,8 +162,7 @@ namespace GSM_UI
                 GSM.LoglineAdded += LogHandler;
                 GSM.PhoneDisconnected += PhoneDisconnectedHandler;
                 Connect();
-                Task.Run(GetInfo).ContinueWith((t) => IncomingCallBackgroundWorker.RunWorkerAsync());
-
+                Task.Run(GetInfo);
             }
             else
             {
@@ -186,8 +186,9 @@ namespace GSM_UI
             var dcs = (int)Enum.Parse(typeof(DataCodingScheme), dcsComboBox.SelectedValue.ToString());
             pdu.ProtocolID = (byte)pid;
             pdu.DataCodingScheme = (byte)dcs;
-
-            dataReceivedRichTextBox.AppendText(pdu.ToString());
+            
+            dataReceivedRichTextBox.AppendText($"AT+CMGS={pdu.ActualLength}\n", Color.Red);
+            dataReceivedRichTextBox.AppendText(pdu + "\n", Color.Red);
         }
 
         private void SmsSettingsSmsModeGetButton_Click(object sender, EventArgs e)
@@ -201,8 +202,15 @@ namespace GSM_UI
             Enum.TryParse(dcsComboBox.SelectedValue.ToString(), out DataCodingScheme dcs);
             pdu.ProtocolID = (byte)pid;
             pdu.DataCodingScheme = (byte)dcs;
-
-            GSM.SendMessage(pdu.ToString(), pdu.ActualLength);
+            pdu.RequestStatusReport = requestStatusReportCheckBox.Checked;
+            try
+            {
+                GSM.SendMessage(pdu.ToString(), pdu.ActualLength);
+            }
+            catch (Exception ex)
+            {
+                dataReceivedRichTextBox.AppendText(ex.Message+"\n", Color.Red);
+            }
         }
 
         private void ClearLogButton_Click(object sender, EventArgs e)
@@ -222,7 +230,7 @@ namespace GSM_UI
             dataReceivedRichTextBox.AppendText($"Messages:{messages.Length}\n");
 
             var inbox = new List<InboxMessage>();
-            foreach (var msg in messages.Take(5))
+            foreach (var msg in messages)
             {
                 var sms = IncomingSmsPdu.Decode(msg.Data, true);
                 inbox.Add(new InboxMessage
@@ -282,6 +290,18 @@ namespace GSM_UI
                 Thread.Sleep(5000);
             }
             e.Cancel = true;
+        }
+
+        private void CheckIncomingCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkIncomingCheckBox.Checked)
+            {
+                IncomingCallBackgroundWorker.RunWorkerAsync();
+            }
+            else
+            {
+                IncomingCallBackgroundWorker.CancelAsync();
+            }
         }
     }
 }
