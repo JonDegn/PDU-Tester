@@ -59,7 +59,11 @@ namespace GSM_UI
             PopulatePortDropdown();
             if (portComboBox.Items.Count > 0) portComboBox.SelectedIndex = 0;
             baudRateComboBox.SelectedIndex = 4;
-            mainTabControl.Enabled = false;
+            dcsComboBox.SelectionChangeCommitted += (s, ea) => UpdatePduString();
+            pidComboBox.SelectionChangeCommitted += (s, ea) => UpdatePduString();
+            requestStatusReportCheckBox.CheckedChanged += (s, ea) => UpdatePduString();
+            smsMessageTextBox.TextChanged += (s, ea) => UpdatePduString();
+            smsMessagePhoneNumberTextBox.TextChanged += (s, ea) => UpdatePduString();
         }
 
         private void SendBtn_Click(object sender, EventArgs e)
@@ -70,24 +74,6 @@ namespace GSM_UI
                 GSM.ReleaseProtocol();
             });
 
-        }
-
-        private void CallBtn_Click(object sender, EventArgs e)
-        {
-            GSM.GetProtocol().ExecAndReceiveMultiple($"ATD{dialTextBox.Text.Trim()};");
-            GSM.ReleaseProtocol();
-        }
-
-        private void AnswerBtn_Click(object sender, EventArgs e)
-        {
-            GSM.GetProtocol().ExecAndReceiveMultiple("ATA");
-            GSM.ReleaseProtocol();
-        }
-
-        private void HangupBtn_Click(object sender, EventArgs e)
-        {
-            GSM.GetProtocol().ExecAndReceiveMultiple("ATH");
-            GSM.ReleaseProtocol();
         }
 
         private void GetInfo()
@@ -119,10 +105,6 @@ namespace GSM_UI
 
         private void Connect()
         {
-            mainTabControl.Invoke((MethodInvoker)delegate
-            {
-                mainTabControl.Enabled = true;
-            });
             connectBtn.Invoke((MethodInvoker)delegate
             {
                 connectBtn.Text = "Disconnect";
@@ -132,10 +114,6 @@ namespace GSM_UI
 
         private void Disconnect()
         {
-            mainTabControl.Invoke((MethodInvoker)delegate
-            {
-                mainTabControl.Enabled = false;
-            });
             connectBtn.Invoke((MethodInvoker)delegate
             {
                 connectBtn.Text = "Connect";
@@ -166,7 +144,6 @@ namespace GSM_UI
             }
             else
             {
-                IncomingCallBackgroundWorker.CancelAsync();
                 GSM.Close();
                 Disconnect();
             }
@@ -174,25 +151,21 @@ namespace GSM_UI
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            IncomingCallBackgroundWorker.CancelAsync();
             if (LogQueue.Count > 0) Task.Run(() => File.WriteAllLines($"{DateTime.Now:yyyyMMddHHmmss}_gsm.log", LogQueue));
             if (Connected) GSM.Close();
         }
 
-        private void SmsMessageShowPDUFormatButton_Click(object sender, EventArgs e)
+        private void UpdatePduString()
         {
             var pdu = new SmsSubmitPdu(smsMessageTextBox.Text, smsMessagePhoneNumberTextBox.Text);
             var pid = (int)Enum.Parse(typeof(ProtocolIdentifier), pidComboBox.SelectedValue.ToString());
             var dcs = (int)Enum.Parse(typeof(DataCodingScheme), dcsComboBox.SelectedValue.ToString());
             pdu.ProtocolID = (byte)pid;
             pdu.DataCodingScheme = (byte)dcs;
-            
-            dataReceivedRichTextBox.AppendText($"AT+CMGS={pdu.ActualLength}\n", Color.Red);
-            dataReceivedRichTextBox.AppendText(pdu + "\n", Color.Red);
-        }
+            pdu.RequestStatusReport = requestStatusReportCheckBox.Checked;
 
-        private void SmsSettingsSmsModeGetButton_Click(object sender, EventArgs e)
-        {
+            pduLengthLabel.Text = pdu.ActualLength.ToString();
+            pduTextBox.Text = pdu.ToString();
         }
 
         private void SmsMessageSendSmsButton_Click(object sender, EventArgs e)
@@ -245,13 +218,6 @@ namespace GSM_UI
             smsInboxGrid.DataSource = inbox;
         }
 
-        private void ReceiveButton_Click(object sender, EventArgs e)
-        {
-            var protocol = GSM.GetProtocol();
-            if (protocol.Receive(out var input)) dataReceivedRichTextBox.AppendText(input, Color.Blue);
-            GSM.ReleaseProtocol();
-        }
-
         class InboxMessage
         {
             public int Index { get; set; }
@@ -261,47 +227,5 @@ namespace GSM_UI
             public string Message { get; set; }
         }
 
-        private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = sender as BackgroundWorker;
-            while (!worker.CancellationPending)
-            {
-
-                var response = GSM.GetProtocol().ExecAndReceiveMultiple("AT+CLCC");
-
-                if (!string.IsNullOrWhiteSpace(response))
-                {
-                    phoneNumberTextBox.Invoke((MethodInvoker)delegate
-                    {
-                        var startIndex = response.IndexOf('\"') + 1;
-                        var endIndex = response.IndexOf('\"', startIndex);
-                        phoneNumberTextBox.Text = response.Substring(startIndex, endIndex - startIndex);
-                    });
-                }
-                else
-                {
-                    phoneNumberTextBox.Invoke((MethodInvoker)delegate
-                    {
-                        phoneNumberTextBox.Text = "";
-                    });
-                }
-
-                GSM.ReleaseProtocol();
-                Thread.Sleep(5000);
-            }
-            e.Cancel = true;
-        }
-
-        private void CheckIncomingCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkIncomingCheckBox.Checked)
-            {
-                IncomingCallBackgroundWorker.RunWorkerAsync();
-            }
-            else
-            {
-                IncomingCallBackgroundWorker.CancelAsync();
-            }
-        }
     }
 }
