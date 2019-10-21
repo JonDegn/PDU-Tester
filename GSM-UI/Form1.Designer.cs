@@ -49,43 +49,42 @@ namespace GSM_UI
             this.baudRateComboBox = new System.Windows.Forms.ComboBox();
             this.portComboBox = new System.Windows.Forms.ComboBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.clearLogButton = new System.Windows.Forms.Button();
             this.dataReceivedRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.commandLabel = new System.Windows.Forms.Label();
+            this.clearLogButton = new System.Windows.Forms.Button();
+            this.cmdTextBox = new System.Windows.Forms.TextBox();
+            this.sendBtn = new System.Windows.Forms.Button();
             this.smsTab = new System.Windows.Forms.TabPage();
             this.SmsTabControl = new System.Windows.Forms.TabControl();
-            this.smsSettingsTab = new System.Windows.Forms.TabPage();
-            this.smsSettingsPDUGroup = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.pidComboBox = new System.Windows.Forms.ComboBox();
-            this.dcsComboBox = new System.Windows.Forms.ComboBox();
-            this.requestStatusReportCheckBox = new System.Windows.Forms.CheckBox();
-            this.smsInboxTab = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.smsInboxGrid = new System.Windows.Forms.DataGridView();
             this.smsMessageTab = new System.Windows.Forms.TabPage();
-            this.smsMessagePhoneNumberTextBox = new System.Windows.Forms.TextBox();
-            this.smsMessagePhoneNumberLabel = new System.Windows.Forms.Label();
-            this.smsMessageTextBox = new System.Windows.Forms.TextBox();
-            this.smsMessageSendSmsButton = new System.Windows.Forms.Button();
             this.smsMessageLabel = new System.Windows.Forms.Label();
-            this.sendBtn = new System.Windows.Forms.Button();
-            this.cmdTextBox = new System.Windows.Forms.TextBox();
-            this.commandLabel = new System.Windows.Forms.Label();
-            this.mainTabControl = new System.Windows.Forms.TabControl();
-            this.label3 = new System.Windows.Forms.Label();
-            this.pduTextBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.pduLengthLabel = new System.Windows.Forms.Label();
+            this.pduTextBox = new System.Windows.Forms.TextBox();
+            this.smsMessageSendSmsButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.smsMessageTextBox = new System.Windows.Forms.TextBox();
+            this.smsSettingsPDUGroup = new System.Windows.Forms.GroupBox();
+            this.requestStatusReportCheckBox = new System.Windows.Forms.CheckBox();
+            this.dcsComboBox = new System.Windows.Forms.ComboBox();
+            this.pidComboBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.smsMessagePhoneNumberLabel = new System.Windows.Forms.Label();
+            this.smsMessagePhoneNumberTextBox = new System.Windows.Forms.TextBox();
+            this.smsInboxTab = new System.Windows.Forms.TabPage();
+            this.smsInboxGrid = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.mainTabControl = new System.Windows.Forms.TabControl();
             this.connectionGroup.SuspendLayout();
             this.portConfigurationGroup.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.smsTab.SuspendLayout();
             this.SmsTabControl.SuspendLayout();
+            this.smsMessageTab.SuspendLayout();
             this.smsSettingsPDUGroup.SuspendLayout();
             this.smsInboxTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.smsInboxGrid)).BeginInit();
-            this.smsMessageTab.SuspendLayout();
             this.mainTabControl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,9 +99,9 @@ namespace GSM_UI
             this.connectionGroup.Controls.Add(this.connectionManufacturerLabel);
             this.connectionGroup.Controls.Add(this.connectionDeviceModelLabel);
             this.connectionGroup.Location = new System.Drawing.Point(1123, 23);
-            this.connectionGroup.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.connectionGroup.Margin = new System.Windows.Forms.Padding(4);
             this.connectionGroup.Name = "connectionGroup";
-            this.connectionGroup.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.connectionGroup.Padding = new System.Windows.Forms.Padding(4);
             this.connectionGroup.Size = new System.Drawing.Size(464, 235);
             this.connectionGroup.TabIndex = 10;
             this.connectionGroup.TabStop = false;
@@ -210,9 +209,9 @@ namespace GSM_UI
             this.portConfigurationGroup.Controls.Add(this.baudRateComboBox);
             this.portConfigurationGroup.Controls.Add(this.portComboBox);
             this.portConfigurationGroup.Location = new System.Drawing.Point(20, 23);
-            this.portConfigurationGroup.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.portConfigurationGroup.Margin = new System.Windows.Forms.Padding(6);
             this.portConfigurationGroup.Name = "portConfigurationGroup";
-            this.portConfigurationGroup.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.portConfigurationGroup.Padding = new System.Windows.Forms.Padding(6);
             this.portConfigurationGroup.Size = new System.Drawing.Size(990, 235);
             this.portConfigurationGroup.TabIndex = 13;
             this.portConfigurationGroup.TabStop = false;
@@ -231,7 +230,7 @@ namespace GSM_UI
             // timeoutTextBox
             // 
             this.timeoutTextBox.Location = new System.Drawing.Point(188, 167);
-            this.timeoutTextBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.timeoutTextBox.Margin = new System.Windows.Forms.Padding(6);
             this.timeoutTextBox.Name = "timeoutTextBox";
             this.timeoutTextBox.Size = new System.Drawing.Size(94, 31);
             this.timeoutTextBox.TabIndex = 5;
@@ -261,7 +260,7 @@ namespace GSM_UI
             // connectBtn
             // 
             this.connectBtn.Location = new System.Drawing.Point(784, 63);
-            this.connectBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.connectBtn.Margin = new System.Windows.Forms.Padding(6);
             this.connectBtn.Name = "connectBtn";
             this.connectBtn.Size = new System.Drawing.Size(150, 44);
             this.connectBtn.TabIndex = 2;
@@ -280,7 +279,7 @@ namespace GSM_UI
             "57600",
             "115200"});
             this.baudRateComboBox.Location = new System.Drawing.Point(188, 115);
-            this.baudRateComboBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.baudRateComboBox.Margin = new System.Windows.Forms.Padding(6);
             this.baudRateComboBox.Name = "baudRateComboBox";
             this.baudRateComboBox.Size = new System.Drawing.Size(134, 33);
             this.baudRateComboBox.TabIndex = 1;
@@ -291,7 +290,7 @@ namespace GSM_UI
             this.portComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.portComboBox.FormattingEnabled = true;
             this.portComboBox.Location = new System.Drawing.Point(188, 67);
-            this.portComboBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.portComboBox.Margin = new System.Windows.Forms.Padding(6);
             this.portComboBox.Name = "portComboBox";
             this.portComboBox.Size = new System.Drawing.Size(460, 33);
             this.portComboBox.TabIndex = 0;
@@ -312,6 +311,26 @@ namespace GSM_UI
             this.tabPage1.Text = "Other";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // dataReceivedRichTextBox
+            // 
+            this.dataReceivedRichTextBox.Location = new System.Drawing.Point(558, 29);
+            this.dataReceivedRichTextBox.Margin = new System.Windows.Forms.Padding(6);
+            this.dataReceivedRichTextBox.Name = "dataReceivedRichTextBox";
+            this.dataReceivedRichTextBox.ReadOnly = true;
+            this.dataReceivedRichTextBox.Size = new System.Drawing.Size(943, 558);
+            this.dataReceivedRichTextBox.TabIndex = 9;
+            this.dataReceivedRichTextBox.Text = "";
+            // 
+            // commandLabel
+            // 
+            this.commandLabel.AutoSize = true;
+            this.commandLabel.Location = new System.Drawing.Point(32, 60);
+            this.commandLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.commandLabel.Name = "commandLabel";
+            this.commandLabel.Size = new System.Drawing.Size(109, 25);
+            this.commandLabel.TabIndex = 1;
+            this.commandLabel.Text = "Command";
+            // 
             // clearLogButton
             // 
             this.clearLogButton.Location = new System.Drawing.Point(1351, 614);
@@ -323,15 +342,24 @@ namespace GSM_UI
             this.clearLogButton.UseVisualStyleBackColor = true;
             this.clearLogButton.Click += new System.EventHandler(this.ClearLogButton_Click);
             // 
-            // dataReceivedRichTextBox
+            // cmdTextBox
             // 
-            this.dataReceivedRichTextBox.Location = new System.Drawing.Point(558, 29);
-            this.dataReceivedRichTextBox.Margin = new System.Windows.Forms.Padding(6);
-            this.dataReceivedRichTextBox.Name = "dataReceivedRichTextBox";
-            this.dataReceivedRichTextBox.ReadOnly = true;
-            this.dataReceivedRichTextBox.Size = new System.Drawing.Size(943, 558);
-            this.dataReceivedRichTextBox.TabIndex = 9;
-            this.dataReceivedRichTextBox.Text = "";
+            this.cmdTextBox.Location = new System.Drawing.Point(153, 57);
+            this.cmdTextBox.Margin = new System.Windows.Forms.Padding(6);
+            this.cmdTextBox.Name = "cmdTextBox";
+            this.cmdTextBox.Size = new System.Drawing.Size(196, 31);
+            this.cmdTextBox.TabIndex = 0;
+            // 
+            // sendBtn
+            // 
+            this.sendBtn.Location = new System.Drawing.Point(380, 50);
+            this.sendBtn.Margin = new System.Windows.Forms.Padding(6);
+            this.sendBtn.Name = "sendBtn";
+            this.sendBtn.Size = new System.Drawing.Size(150, 44);
+            this.sendBtn.TabIndex = 2;
+            this.sendBtn.Text = "Send";
+            this.sendBtn.UseVisualStyleBackColor = true;
+            this.sendBtn.Click += new System.EventHandler(this.SendBtn_Click);
             // 
             // smsTab
             // 
@@ -349,127 +377,12 @@ namespace GSM_UI
             // 
             this.SmsTabControl.Controls.Add(this.smsMessageTab);
             this.SmsTabControl.Controls.Add(this.smsInboxTab);
-            this.SmsTabControl.Controls.Add(this.smsSettingsTab);
             this.SmsTabControl.Location = new System.Drawing.Point(6, 56);
             this.SmsTabControl.Margin = new System.Windows.Forms.Padding(4);
             this.SmsTabControl.Name = "SmsTabControl";
             this.SmsTabControl.SelectedIndex = 0;
             this.SmsTabControl.Size = new System.Drawing.Size(1523, 623);
             this.SmsTabControl.TabIndex = 0;
-            // 
-            // smsSettingsTab
-            // 
-            this.smsSettingsTab.Location = new System.Drawing.Point(8, 39);
-            this.smsSettingsTab.Margin = new System.Windows.Forms.Padding(4);
-            this.smsSettingsTab.Name = "smsSettingsTab";
-            this.smsSettingsTab.Size = new System.Drawing.Size(1507, 576);
-            this.smsSettingsTab.TabIndex = 2;
-            this.smsSettingsTab.Text = "Settings";
-            this.smsSettingsTab.UseVisualStyleBackColor = true;
-            // 
-            // smsSettingsPDUGroup
-            // 
-            this.smsSettingsPDUGroup.Controls.Add(this.requestStatusReportCheckBox);
-            this.smsSettingsPDUGroup.Controls.Add(this.dcsComboBox);
-            this.smsSettingsPDUGroup.Controls.Add(this.pidComboBox);
-            this.smsSettingsPDUGroup.Controls.Add(this.label2);
-            this.smsSettingsPDUGroup.Controls.Add(this.label1);
-            this.smsSettingsPDUGroup.Location = new System.Drawing.Point(696, 87);
-            this.smsSettingsPDUGroup.Margin = new System.Windows.Forms.Padding(4);
-            this.smsSettingsPDUGroup.Name = "smsSettingsPDUGroup";
-            this.smsSettingsPDUGroup.Padding = new System.Windows.Forms.Padding(4);
-            this.smsSettingsPDUGroup.Size = new System.Drawing.Size(803, 469);
-            this.smsSettingsPDUGroup.TabIndex = 1;
-            this.smsSettingsPDUGroup.TabStop = false;
-            this.smsSettingsPDUGroup.Text = "PDU Settings";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 58);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(233, 25);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Protocol Identifier (PID)";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 112);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(279, 25);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Data Coding Scheme (DCS)";
-            // 
-            // pidComboBox
-            // 
-            this.pidComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.pidComboBox.FormattingEnabled = true;
-            this.pidComboBox.Location = new System.Drawing.Point(342, 52);
-            this.pidComboBox.Margin = new System.Windows.Forms.Padding(4);
-            this.pidComboBox.Name = "pidComboBox";
-            this.pidComboBox.Size = new System.Drawing.Size(374, 33);
-            this.pidComboBox.TabIndex = 14;
-            // 
-            // dcsComboBox
-            // 
-            this.dcsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dcsComboBox.FormattingEnabled = true;
-            this.dcsComboBox.Location = new System.Drawing.Point(342, 106);
-            this.dcsComboBox.Margin = new System.Windows.Forms.Padding(4);
-            this.dcsComboBox.Name = "dcsComboBox";
-            this.dcsComboBox.Size = new System.Drawing.Size(374, 33);
-            this.dcsComboBox.TabIndex = 18;
-            // 
-            // requestStatusReportCheckBox
-            // 
-            this.requestStatusReportCheckBox.AutoSize = true;
-            this.requestStatusReportCheckBox.Location = new System.Drawing.Point(32, 198);
-            this.requestStatusReportCheckBox.Margin = new System.Windows.Forms.Padding(6);
-            this.requestStatusReportCheckBox.Name = "requestStatusReportCheckBox";
-            this.requestStatusReportCheckBox.Size = new System.Drawing.Size(314, 29);
-            this.requestStatusReportCheckBox.TabIndex = 19;
-            this.requestStatusReportCheckBox.Text = "Request status report (SRR)";
-            this.requestStatusReportCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // smsInboxTab
-            // 
-            this.smsInboxTab.Controls.Add(this.smsInboxGrid);
-            this.smsInboxTab.Controls.Add(this.button1);
-            this.smsInboxTab.Location = new System.Drawing.Point(8, 39);
-            this.smsInboxTab.Margin = new System.Windows.Forms.Padding(4);
-            this.smsInboxTab.Name = "smsInboxTab";
-            this.smsInboxTab.Padding = new System.Windows.Forms.Padding(4);
-            this.smsInboxTab.Size = new System.Drawing.Size(1507, 576);
-            this.smsInboxTab.TabIndex = 1;
-            this.smsInboxTab.Text = "Inbox";
-            this.smsInboxTab.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(10, 519);
-            this.button1.Margin = new System.Windows.Forms.Padding(6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 44);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Get Inbox";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // smsInboxGrid
-            // 
-            this.smsInboxGrid.AllowUserToAddRows = false;
-            this.smsInboxGrid.AllowUserToDeleteRows = false;
-            this.smsInboxGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.smsInboxGrid.Location = new System.Drawing.Point(16, 10);
-            this.smsInboxGrid.Margin = new System.Windows.Forms.Padding(6);
-            this.smsInboxGrid.Name = "smsInboxGrid";
-            this.smsInboxGrid.ReadOnly = true;
-            this.smsInboxGrid.RowHeadersWidth = 82;
-            this.smsInboxGrid.Size = new System.Drawing.Size(1481, 498);
-            this.smsInboxGrid.TabIndex = 8;
             // 
             // smsMessageTab
             // 
@@ -492,32 +405,35 @@ namespace GSM_UI
             this.smsMessageTab.Text = "Message";
             this.smsMessageTab.UseVisualStyleBackColor = true;
             // 
-            // smsMessagePhoneNumberTextBox
+            // smsMessageLabel
             // 
-            this.smsMessagePhoneNumberTextBox.Location = new System.Drawing.Point(184, 99);
-            this.smsMessagePhoneNumberTextBox.Margin = new System.Windows.Forms.Padding(6);
-            this.smsMessagePhoneNumberTextBox.Name = "smsMessagePhoneNumberTextBox";
-            this.smsMessagePhoneNumberTextBox.Size = new System.Drawing.Size(196, 31);
-            this.smsMessagePhoneNumberTextBox.TabIndex = 9;
+            this.smsMessageLabel.AutoSize = true;
+            this.smsMessageLabel.Location = new System.Drawing.Point(16, 145);
+            this.smsMessageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.smsMessageLabel.Name = "smsMessageLabel";
+            this.smsMessageLabel.Size = new System.Drawing.Size(100, 25);
+            this.smsMessageLabel.TabIndex = 12;
+            this.smsMessageLabel.Text = "Message";
             // 
-            // smsMessagePhoneNumberLabel
+            // pduLengthLabel
             // 
-            this.smsMessagePhoneNumberLabel.AutoSize = true;
-            this.smsMessagePhoneNumberLabel.Location = new System.Drawing.Point(16, 103);
-            this.smsMessagePhoneNumberLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.smsMessagePhoneNumberLabel.Name = "smsMessagePhoneNumberLabel";
-            this.smsMessagePhoneNumberLabel.Size = new System.Drawing.Size(155, 25);
-            this.smsMessagePhoneNumberLabel.TabIndex = 10;
-            this.smsMessagePhoneNumberLabel.Text = "Phone Number";
+            this.pduLengthLabel.AutoSize = true;
+            this.pduLengthLabel.Location = new System.Drawing.Point(621, 368);
+            this.pduLengthLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.pduLengthLabel.Name = "pduLengthLabel";
+            this.pduLengthLabel.Size = new System.Drawing.Size(24, 25);
+            this.pduLengthLabel.TabIndex = 15;
+            this.pduLengthLabel.Text = "0";
             // 
-            // smsMessageTextBox
+            // pduTextBox
             // 
-            this.smsMessageTextBox.Location = new System.Drawing.Point(22, 172);
-            this.smsMessageTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.smsMessageTextBox.Multiline = true;
-            this.smsMessageTextBox.Name = "smsMessageTextBox";
-            this.smsMessageTextBox.Size = new System.Drawing.Size(615, 96);
-            this.smsMessageTextBox.TabIndex = 11;
+            this.pduTextBox.Location = new System.Drawing.Point(21, 399);
+            this.pduTextBox.Margin = new System.Windows.Forms.Padding(6);
+            this.pduTextBox.Multiline = true;
+            this.pduTextBox.Name = "pduTextBox";
+            this.pduTextBox.ReadOnly = true;
+            this.pduTextBox.Size = new System.Drawing.Size(616, 157);
+            this.pduTextBox.TabIndex = 13;
             // 
             // smsMessageSendSmsButton
             // 
@@ -530,44 +446,156 @@ namespace GSM_UI
             this.smsMessageSendSmsButton.UseVisualStyleBackColor = true;
             this.smsMessageSendSmsButton.Click += new System.EventHandler(this.SmsMessageSendSmsButton_Click);
             // 
-            // smsMessageLabel
+            // label3
             // 
-            this.smsMessageLabel.AutoSize = true;
-            this.smsMessageLabel.Location = new System.Drawing.Point(16, 145);
-            this.smsMessageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.smsMessageLabel.Name = "smsMessageLabel";
-            this.smsMessageLabel.Size = new System.Drawing.Size(100, 25);
-            this.smsMessageLabel.TabIndex = 12;
-            this.smsMessageLabel.Text = "Message";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 368);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(118, 25);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "PDU String";
             // 
-            // sendBtn
+            // label4
             // 
-            this.sendBtn.Location = new System.Drawing.Point(380, 50);
-            this.sendBtn.Margin = new System.Windows.Forms.Padding(6);
-            this.sendBtn.Name = "sendBtn";
-            this.sendBtn.Size = new System.Drawing.Size(150, 44);
-            this.sendBtn.TabIndex = 2;
-            this.sendBtn.Text = "Send";
-            this.sendBtn.UseVisualStyleBackColor = true;
-            this.sendBtn.Click += new System.EventHandler(this.SendBtn_Click);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(529, 368);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(84, 25);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Length:";
             // 
-            // cmdTextBox
+            // smsMessageTextBox
             // 
-            this.cmdTextBox.Location = new System.Drawing.Point(153, 57);
-            this.cmdTextBox.Margin = new System.Windows.Forms.Padding(6);
-            this.cmdTextBox.Name = "cmdTextBox";
-            this.cmdTextBox.Size = new System.Drawing.Size(196, 31);
-            this.cmdTextBox.TabIndex = 0;
+            this.smsMessageTextBox.Location = new System.Drawing.Point(22, 172);
+            this.smsMessageTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.smsMessageTextBox.Multiline = true;
+            this.smsMessageTextBox.Name = "smsMessageTextBox";
+            this.smsMessageTextBox.Size = new System.Drawing.Size(615, 96);
+            this.smsMessageTextBox.TabIndex = 11;
             // 
-            // commandLabel
+            // smsSettingsPDUGroup
             // 
-            this.commandLabel.AutoSize = true;
-            this.commandLabel.Location = new System.Drawing.Point(32, 60);
-            this.commandLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.commandLabel.Name = "commandLabel";
-            this.commandLabel.Size = new System.Drawing.Size(109, 25);
-            this.commandLabel.TabIndex = 1;
-            this.commandLabel.Text = "Command";
+            this.smsSettingsPDUGroup.Controls.Add(this.requestStatusReportCheckBox);
+            this.smsSettingsPDUGroup.Controls.Add(this.dcsComboBox);
+            this.smsSettingsPDUGroup.Controls.Add(this.pidComboBox);
+            this.smsSettingsPDUGroup.Controls.Add(this.label2);
+            this.smsSettingsPDUGroup.Controls.Add(this.label1);
+            this.smsSettingsPDUGroup.Location = new System.Drawing.Point(696, 87);
+            this.smsSettingsPDUGroup.Margin = new System.Windows.Forms.Padding(4);
+            this.smsSettingsPDUGroup.Name = "smsSettingsPDUGroup";
+            this.smsSettingsPDUGroup.Padding = new System.Windows.Forms.Padding(4);
+            this.smsSettingsPDUGroup.Size = new System.Drawing.Size(803, 469);
+            this.smsSettingsPDUGroup.TabIndex = 1;
+            this.smsSettingsPDUGroup.TabStop = false;
+            this.smsSettingsPDUGroup.Text = "PDU Settings";
+            // 
+            // requestStatusReportCheckBox
+            // 
+            this.requestStatusReportCheckBox.AutoSize = true;
+            this.requestStatusReportCheckBox.Location = new System.Drawing.Point(29, 174);
+            this.requestStatusReportCheckBox.Margin = new System.Windows.Forms.Padding(6);
+            this.requestStatusReportCheckBox.Name = "requestStatusReportCheckBox";
+            this.requestStatusReportCheckBox.Size = new System.Drawing.Size(314, 29);
+            this.requestStatusReportCheckBox.TabIndex = 19;
+            this.requestStatusReportCheckBox.Text = "Request status report (SRR)";
+            this.requestStatusReportCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // dcsComboBox
+            // 
+            this.dcsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dcsComboBox.FormattingEnabled = true;
+            this.dcsComboBox.Location = new System.Drawing.Point(342, 106);
+            this.dcsComboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.dcsComboBox.Name = "dcsComboBox";
+            this.dcsComboBox.Size = new System.Drawing.Size(374, 33);
+            this.dcsComboBox.TabIndex = 18;
+            // 
+            // pidComboBox
+            // 
+            this.pidComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.pidComboBox.FormattingEnabled = true;
+            this.pidComboBox.Location = new System.Drawing.Point(342, 52);
+            this.pidComboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.pidComboBox.Name = "pidComboBox";
+            this.pidComboBox.Size = new System.Drawing.Size(374, 33);
+            this.pidComboBox.TabIndex = 14;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(24, 112);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(279, 25);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Data Coding Scheme (DCS)";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 58);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(233, 25);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Protocol Identifier (PID)";
+            // 
+            // smsMessagePhoneNumberLabel
+            // 
+            this.smsMessagePhoneNumberLabel.AutoSize = true;
+            this.smsMessagePhoneNumberLabel.Location = new System.Drawing.Point(16, 103);
+            this.smsMessagePhoneNumberLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.smsMessagePhoneNumberLabel.Name = "smsMessagePhoneNumberLabel";
+            this.smsMessagePhoneNumberLabel.Size = new System.Drawing.Size(155, 25);
+            this.smsMessagePhoneNumberLabel.TabIndex = 10;
+            this.smsMessagePhoneNumberLabel.Text = "Phone Number";
+            // 
+            // smsMessagePhoneNumberTextBox
+            // 
+            this.smsMessagePhoneNumberTextBox.Location = new System.Drawing.Point(184, 99);
+            this.smsMessagePhoneNumberTextBox.Margin = new System.Windows.Forms.Padding(6);
+            this.smsMessagePhoneNumberTextBox.Name = "smsMessagePhoneNumberTextBox";
+            this.smsMessagePhoneNumberTextBox.Size = new System.Drawing.Size(196, 31);
+            this.smsMessagePhoneNumberTextBox.TabIndex = 9;
+            // 
+            // smsInboxTab
+            // 
+            this.smsInboxTab.Controls.Add(this.smsInboxGrid);
+            this.smsInboxTab.Controls.Add(this.button1);
+            this.smsInboxTab.Location = new System.Drawing.Point(8, 39);
+            this.smsInboxTab.Margin = new System.Windows.Forms.Padding(4);
+            this.smsInboxTab.Name = "smsInboxTab";
+            this.smsInboxTab.Padding = new System.Windows.Forms.Padding(4);
+            this.smsInboxTab.Size = new System.Drawing.Size(1507, 576);
+            this.smsInboxTab.TabIndex = 1;
+            this.smsInboxTab.Text = "Inbox";
+            this.smsInboxTab.UseVisualStyleBackColor = true;
+            // 
+            // smsInboxGrid
+            // 
+            this.smsInboxGrid.AllowUserToAddRows = false;
+            this.smsInboxGrid.AllowUserToDeleteRows = false;
+            this.smsInboxGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.smsInboxGrid.Location = new System.Drawing.Point(16, 10);
+            this.smsInboxGrid.Margin = new System.Windows.Forms.Padding(6);
+            this.smsInboxGrid.Name = "smsInboxGrid";
+            this.smsInboxGrid.ReadOnly = true;
+            this.smsInboxGrid.RowHeadersWidth = 82;
+            this.smsInboxGrid.Size = new System.Drawing.Size(1481, 498);
+            this.smsInboxGrid.TabIndex = 8;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(10, 519);
+            this.button1.Margin = new System.Windows.Forms.Padding(6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(150, 44);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Get Inbox";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // mainTabControl
             // 
@@ -580,46 +608,6 @@ namespace GSM_UI
             this.mainTabControl.Size = new System.Drawing.Size(1553, 731);
             this.mainTabControl.TabIndex = 8;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 368);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(118, 25);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "PDU String";
-            // 
-            // pduTextBox
-            // 
-            this.pduTextBox.Location = new System.Drawing.Point(21, 399);
-            this.pduTextBox.Margin = new System.Windows.Forms.Padding(6);
-            this.pduTextBox.Multiline = true;
-            this.pduTextBox.Name = "pduTextBox";
-            this.pduTextBox.ReadOnly = true;
-            this.pduTextBox.Size = new System.Drawing.Size(616, 157);
-            this.pduTextBox.TabIndex = 13;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(529, 368);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(84, 25);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Length:";
-            // 
-            // pduLengthLabel
-            // 
-            this.pduLengthLabel.AutoSize = true;
-            this.pduLengthLabel.Location = new System.Drawing.Point(621, 368);
-            this.pduLengthLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.pduLengthLabel.Name = "pduLengthLabel";
-            this.pduLengthLabel.Size = new System.Drawing.Size(24, 25);
-            this.pduLengthLabel.TabIndex = 15;
-            this.pduLengthLabel.Text = "0";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -629,7 +617,7 @@ namespace GSM_UI
             this.Controls.Add(this.connectionGroup);
             this.Controls.Add(this.mainTabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.Text = "PDU Tester";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
@@ -642,12 +630,12 @@ namespace GSM_UI
             this.tabPage1.PerformLayout();
             this.smsTab.ResumeLayout(false);
             this.SmsTabControl.ResumeLayout(false);
+            this.smsMessageTab.ResumeLayout(false);
+            this.smsMessageTab.PerformLayout();
             this.smsSettingsPDUGroup.ResumeLayout(false);
             this.smsSettingsPDUGroup.PerformLayout();
             this.smsInboxTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.smsInboxGrid)).EndInit();
-            this.smsMessageTab.ResumeLayout(false);
-            this.smsMessageTab.PerformLayout();
             this.mainTabControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -694,7 +682,6 @@ namespace GSM_UI
         private System.Windows.Forms.TabPage smsInboxTab;
         private System.Windows.Forms.DataGridView smsInboxGrid;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TabPage smsSettingsTab;
         private System.Windows.Forms.TabControl mainTabControl;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox pduTextBox;

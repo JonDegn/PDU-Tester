@@ -163,7 +163,6 @@ namespace GSM_UI
             pdu.ProtocolID = (byte)pid;
             pdu.DataCodingScheme = (byte)dcs;
             pdu.RequestStatusReport = requestStatusReportCheckBox.Checked;
-
             pduLengthLabel.Text = pdu.ActualLength.ToString();
             pduTextBox.Text = pdu.ToString();
         }
